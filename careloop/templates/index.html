@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#028090"><link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/static/icon-192.png"><title>CareLoop</title>
+<style>
+:root{--t:#028090;--d:#0b2a33;--bg:#eef3f5;--m:#5b6b73;--ok:#12805c;--w:#b7791f;--dg:#d9480f;--cr:#c0182b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#cfd8dc;font-family:system-ui,Segoe UI,Roboto,sans-serif;color:var(--d)}
+#splash{position:fixed;inset:0;background:var(--t);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9;transition:opacity .5s}
+.logo{width:84px;height:84px;border-radius:24px;background:#fff;color:var(--t);font-size:48px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+#app{max-width:440px;margin:0 auto;height:100vh;height:100dvh;background:var(--bg);display:flex;flex-direction:column;position:relative;overflow:hidden}
+header{background:var(--t);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+header small{display:block;opacity:.85}header b{font-size:20px}
+#sos{background:var(--cr);color:#fff;border:2px solid #fff;border-radius:99px;padding:8px 16px;font-weight:800;font-size:15px}
+main{flex:1;overflow-y:auto;padding:14px}.pg{display:none}.pg.on{display:block}
+nav{display:flex;background:#fff;border-top:1px solid #dde3e6;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;padding:8px 0;font-size:11px;color:var(--m)}nav button span{display:block;font-size:22px}
+nav button.on{color:var(--t);font-weight:700}
+.c{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 4px #0001}
+.c h3{margin:0 0 8px;font-size:15px}.row{display:flex;gap:10px}.row>*{flex:1}
+.big{font-size:38px;font-weight:800;margin:0}.mut{color:var(--m);font-size:13px}
+.b{display:inline-block;padding:3px 10px;border-radius:99px;color:#fff;font-weight:700;font-size:12px}
+.normal{background:var(--ok)}.watch{background:var(--w)}.danger{background:var(--dg)}.critical{background:var(--cr)}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cfd8dc;border-radius:10px;font-size:16px;margin-top:8px;background:#fff}
+.btn{width:100%;padding:13px;border:0;border-radius:12px;background:var(--t);color:#fff;font-weight:700;font-size:16px;margin-top:8px}
+.btn.s{background:#e0f2f1;color:var(--t)}
+.q{display:grid;grid-template-columns:1fr 1fr;gap:10px}.q button{border:0;border-radius:14px;padding:16px 8px;background:#fff;font-size:14px;font-weight:600;box-shadow:0 1px 4px #0001}.q span{display:block;font-size:26px}
+.seg{display:flex;background:#dde6e9;border-radius:12px;padding:3px}.seg button{flex:1;border:0;padding:10px;border-radius:10px;background:none;font-weight:700;color:var(--m)}.seg .on{background:#fff;color:var(--t)}
+.w{border-left:4px solid var(--dg);background:#fff4ed;padding:8px 10px;border-radius:8px;margin:6px 0;font-size:14px}
+.med{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef1f2}.med:last-child{border:0}
+.med input{width:24px;height:24px;margin:0}.med div{flex:1}.med.done b{text-decoration:line-through;color:var(--m)}
+.x{border:0;background:none;color:var(--cr);font-size:18px}canvas{width:100%;height:80px}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--d);color:#fff;padding:10px 16px;border-radius:99px;font-size:14px;opacity:0;transition:.3s;pointer-events:none;max-width:90%;text-align:center;z-index:8}
+#toast.on{opacity:1}
+</style></head><body>
+<div id="splash"><div class="logo">+</div><h1 style="margin:0">CareLoop</h1><p>Care that never stops</p></div>
+<div id="app">
+<header><div><small id="hi">Hello</small><b>CareLoop</b></div><button id="sos" onclick="sos()">SOS</button></header>
+<main>
+<section class="pg on" id="home">
+ <div class="row"><div class="c"><h3>Sugar</h3><div id="hs"></div><canvas id="sg" width="300" height="80"></canvas></div>
+ <div class="c"><h3>Blood pressure</h3><div id="hb"></div><canvas id="sb" width="300" height="80"></canvas></div></div>
+ <div class="c"><h3>Next medicine</h3><div id="nm" class="mut"></div></div>
+ <div class="q"><button onclick="goLog('glucose')"><span>🩸</span>Log sugar</button><button onclick="goLog('bp')"><span>❤️</span>Log BP</button>
+ <button onclick="tab('scan')"><span>📷</span>Scan prescription</button><button onclick="tab('meds')"><span>⏰</span>Reminders</button></div>
+ <div class="c" style="margin-top:12px"><h3>Latest alerts</h3><div id="ha"></div></div>
+ <button class="btn s" onclick="seed()">Load demo data</button>
+</section>
+<section class="pg" id="log">
+ <div class="seg"><button id="sg1" class="on" onclick="goLog('glucose')">Sugar</button><button id="sb1" onclick="goLog('bp')">Blood pressure</button></div>
+ <div class="c" style="margin-top:12px"><input id="v1" type="number" inputmode="numeric" placeholder="Sugar mg/dL"><input id="v2" type="number" inputmode="numeric" placeholder="Diastolic" style="display:none">
+ <select id="ctx"><option value="random">Any time</option><option value="fasting">Fasting</option></select>
+ <button class="btn" onclick="save()">Save reading</button><button class="btn s" onclick="listen()">🎤 Speak reading</button><p class="mut" id="heard"></p></div>
+ <div id="res"></div>
+</section>
+<section class="pg" id="scan">
+ <div class="c"><h3>Scan prescription</h3><input type="file" id="img" accept="image/*" capture="environment">
+ <textarea id="rt" rows="4" placeholder="Or paste text:&#10;Tab Glycomet 500 1-0-1 after food&#10;Tab Ecosprin 75 0-0-1&#10;Tab Brufen 400 TDS"></textarea>
+ <select id="rl"><option value="hi">Explain in Hindi</option><option value="en">Explain in English</option></select>
+ <button class="btn" onclick="scan()">Explain my prescription</button></div><div id="ro"></div>
+</section>
+<section class="pg" id="meds">
+ <div class="c"><h3>Today's medicines</h3><div id="ml"></div>
+ <div class="row"><input id="mn" placeholder="Medicine"><input id="mt" type="time" value="08:00"></div>
+ <button class="btn s" onclick="addMed()">Add reminder</button><button class="btn" onclick="notif()">Turn on notifications</button></div>
+</section>
+<section class="pg" id="fam">
+ <div class="c"><h3>Patient and family</h3><input id="pn" placeholder="Patient name"><input id="fn" placeholder="Family member">
+ <input id="tg" placeholder="Telegram chat id (optional)"><select id="pl"><option value="hi">Hindi</option><option value="en">English</option></select>
+ <button class="btn" onclick="savePt()">Save</button></div>
+ <div class="c"><h3>Alerts sent</h3><div id="al"></div></div>
+ <a class="btn s" style="display:block;text-align:center;text-decoration:none" href="tel:108">📞 Call ambulance 108</a>
+</section>
+</main>
+<nav id="nav"><button class="on" data-t="home"><span>🏠</span>Home</button><button data-t="log"><span>📈</span>Log</button><button data-t="scan"><span>📷</span>Scan</button><button data-t="meds"><span>💊</span>Meds</button><button data-t="fam"><span>👨‍👩‍👧</span>Family</button></nav>
+</div><div id="toast"></div>
+<script>
+const $=i=>document.getElementById(i),LV={normal:'Safe',watch:'Watch',danger:'Danger',critical:'Critical'};
+const J=(u,o)=>fetch(u,o).then(async r=>{const j=await r.json();if(!r.ok)throw new Error(j.error||'Error');return j});
+const P=(u,b)=>J(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+let KIND='glucose',LANG='hi',TIMES={morning:'08:00',afternoon:'14:00',night:'21:00'},RX=null;
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2800)}
+function speak(t,l){if(!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(t);u.lang=l||(LANG==='hi'?'hi-IN':'en-IN');speechSynthesis.cancel();speechSynthesis.speak(u)}
+function tab(t){document.querySelectorAll('.pg,#nav button').forEach(x=>x.classList.remove('on'));$(t).classList.add('on');document.querySelector(`[data-t=${t}]`).classList.add('on');
+ ({home:loadHome,meds:renderMeds,fam:loadFam})[t]?.()}
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
+function goLog(k){KIND=k;tab('log');$('sg1').classList.toggle('on',k==='glucose');$('sb1').classList.toggle('on',k==='bp');
+ $('v1').placeholder=k==='bp'?'Systolic':'Sugar mg/dL';$('v2').style.display=k==='bp'?'block':'none';$('ctx').style.display=k==='bp'?'none':'block'}
+function spark(c,v){const g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);if(v.length<2)return;
+ const mn=Math.min(...v)-5,mx=Math.max(...v)+5,X=i=>8+i*(c.width-16)/(v.length-1),Y=y=>c.height-8-(y-mn)*(c.height-16)/(mx-mn);
+ g.strokeStyle='#028090';g.lineWidth=4;g.lineJoin='round';g.beginPath();v.forEach((y,i)=>i?g.lineTo(X(i),Y(y)):g.moveTo(X(i),Y(y)));g.stroke()}
+const taken=()=>JSON.parse(localStorage.getItem('taken-'+new Date().toDateString())||'[]');
+async function loadHome(){
+ const [g,b,m,a]=await Promise.all([J('/api/readings?kind=glucose'),J('/api/readings?kind=bp'),J('/api/meds'),J('/api/alerts')]);
+ const card=(r,f)=>r?`<p class="big">${f(r)}</p><span class="b ${r.level}">${LV[r.level]}</span>`:'<p class="mut">No reading yet</p>';
+ $('hs').innerHTML=card(g.at(-1),r=>r.value);$('hb').innerHTML=card(b.at(-1),r=>r.value+'/'+r.value2);
+ spark($('sg'),g.map(r=>r.value));spark($('sb'),b.map(r=>r.value));
+ const t=taken(),n=m.find(x=>!t.includes(x.id));
+ $('nm').innerHTML=n?`<b style="font-size:18px;color:#0b2a33">${n.name}</b><br>at ${n.time}`:(m.length?'All done today ✓':'No reminders yet. Scan a prescription to add them.');
+ $('ha').innerHTML=a.slice(0,3).map(x=>`<div class="w"><span class="b ${x.level}">${x.level}</span> ${x.message}</div>`).join('')||'<p class="mut">No alerts. All good.</p>'}
+async function save(){try{const r=await P('/api/reading',{kind:KIND,value:$('v1').value,value2:$('v2').value,context:$('ctx').value});
+ const pr=r.prediction&&r.prediction.warning?`<div class="w"><b>Early warning:</b> ${r.prediction.warning}</div>`:'';
+ $('res').innerHTML=`<div class="c"><span class="b ${r.level}">${r.title}</span><ul>${r.steps.map(s=>`<li>${s}</li>`).join('')}</ul>${pr}${r.alerted?`<p class="mut">Family alerted via ${r.alerted}</p>`:''}</div>`;
+ if(r.level!=='normal'||pr)speak(r.title+'. '+r.steps[0]);$('v1').value=$('v2').value=''}catch(e){toast(e.message)}}
+function listen(){const S=window.SpeechRecognition||window.webkitSpeechRecognition;if(!S)return toast('Voice needs Chrome. Type instead.');
+ const r=new S();r.lang=LANG==='hi'?'hi-IN':'en-IN';r.onresult=async e=>{const t=e.results[0][0].transcript;$('heard').textContent='Heard: '+t;
+ try{const p=await P('/api/voice-parse',{text:t});goLog(p.kind);$('v1').value=p.value;if(p.value2)$('v2').value=p.value2;save()}catch(x){toast(x.message)}};r.start()}
+async function scan(){const f=new FormData();f.append('lang',$('rl').value);f.append('text',$('rt').value);if($('img').files[0])f.append('image',$('img').files[0]);
+ try{const r=await J('/api/prescription',{method:'POST',body:f});RX=r;
+ const sl=['morning','afternoon','night'].filter(k=>r.schedule[k].length).map(k=>`<p><b>${k}</b>: ${r.schedule[k].join(', ')}</p>`).join('');
+ const it=r.interactions.map(i=>`<div class="w"><b>${i.drugs.join(' + ')}</b>: ${i.message}</div>`).join('')||'<p class="mut">No known conflicts.</p>';
+ $('ro').innerHTML=`<div class="c"><h3>Daily schedule</h3>${sl}<button class="btn" onclick="setRem()">⏰ Set reminders</button></div><div class="c"><h3>Safety check</h3>${it}</div>
+ <div class="c"><h3>Cheaper generics</h3>${r.medicines.map(m=>`<p>${m.generic}: save about <b>${m.saving}%</b></p>`).join('')}<p class="mut">Demo prices.</p></div>
+ <div class="c"><h3>Spoken plan</h3><p>${r.speech}</p><button class="btn s" id="pl2">🔊 Play aloud</button></div>`;
+ $('pl2').onclick=()=>speak(r.speech,$('rl').value==='hi'?'hi-IN':'en-IN')}catch(e){toast(e.message)}}
+async function setRem(){for(const m of RX.medicines)for(const s of m.slots)await P('/api/meds',{name:m.generic,time:TIMES[s]});toast('Reminders added');tab('meds')}
+async function renderMeds(){const m=await J('/api/meds'),t=taken();
+ $('ml').innerHTML=m.map(x=>`<div class="med ${t.includes(x.id)?'done':''}"><input type="checkbox" ${t.includes(x.id)?'checked':''} onchange="tick(${x.id},this.checked)"><div><b>${x.name}</b><br><span class="mut">${x.time}</span></div><button class="x" onclick="delMed(${x.id})">✕</button></div>`).join('')||'<p class="mut">No reminders yet.</p>'}
+function tick(id,on){let t=taken().filter(i=>i!==id);if(on)t.push(id);localStorage.setItem('taken-'+new Date().toDateString(),JSON.stringify(t));renderMeds()}
+async function addMed(){try{await P('/api/meds',{name:$('mn').value,time:$('mt').value});$('mn').value='';renderMeds()}catch(e){toast(e.message)}}
+async function delMed(i){await J('/api/meds/'+i,{method:'DELETE'});renderMeds()}
+function notif(){if(!('Notification' in window))return toast('Not supported here');Notification.requestPermission().then(p=>toast(p==='granted'?'Notifications on':'Permission denied'))}
+let last='';setInterval(async()=>{const d=new Date(),hm=d.toTimeString().slice(0,5);if(hm===last)return;last=hm;
+ const t=taken();(await J('/api/meds')).filter(m=>m.time===hm&&!t.includes(m.id)).forEach(m=>{const msg='Time for '+m.name;toast(msg);speak(msg);
+ if(window.Notification&&Notification.permission==='granted')new Notification('CareLoop',{body:msg,icon:'/static/icon-192.png'})})},20000);
+async function sos(){if(!confirm('Send an emergency alert to your family now?'))return;try{const r=await P('/api/sos',{});toast('Family alerted via '+r.sent_via);tab('fam')}catch(e){toast(e.message)}}
+async function loadFam(){const p=await J('/api/patient');$('pn').value=p.name||'';$('fn').value=p.family_name||'';$('tg').value=p.telegram_chat_id||'';$('pl').value=p.language;
+ const a=await J('/api/alerts');$('al').innerHTML=a.map(x=>`<div class="w"><span class="b ${x.level}">${x.level}</span> ${x.message}<br><span class="mut">${x.ts} UTC</span></div>`).join('')||'<p class="mut">No alerts yet.</p>'}
+async function savePt(){const p=await P('/api/patient',{name:$('pn').value||null,family_name:$('fn').value||null,telegram_chat_id:$('tg').value||null,language:$('pl').value});LANG=p.language;toast('Saved');hello(p)}
+function hello(p){$('hi').textContent='Hello, '+(p.name||'there')}
+async function seed(){await P('/api/seed',{});toast('Demo data loaded. Log sugar 84 for an early warning.');loadHome()}
+J('/api/patient').then(p=>{LANG=p.language;hello(p)});loadHome();
+setTimeout(()=>{$('splash').style.opacity=0;setTimeout(()=>$('splash').remove(),500)},1100);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+</script></body></html>

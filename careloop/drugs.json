@@ -1,0 +1,321 @@
+[
+ {
+  "generic_key": "metformin",
+  "generic": "Metformin",
+  "cls": "biguanide",
+  "aliases": [
+   "glycomet",
+   "glyciphage",
+   "metformin"
+  ],
+  "purpose": "controls blood sugar",
+  "purpose_hi": "शुगर कंट्रोल करने की दवा",
+  "food": "after",
+  "brand_price_demo": 75,
+  "generic_price_demo": 12
+ },
+ {
+  "generic_key": "glimepiride",
+  "generic": "Glimepiride",
+  "cls": "sulfonylurea",
+  "aliases": [
+   "amaryl",
+   "glimepiride",
+   "glimy"
+  ],
+  "purpose": "lowers blood sugar",
+  "purpose_hi": "शुगर कम करने की दवा",
+  "food": "before",
+  "brand_price_demo": 140,
+  "generic_price_demo": 25
+ },
+ {
+  "generic_key": "sitagliptin",
+  "generic": "Sitagliptin",
+  "cls": "dpp4",
+  "aliases": [
+   "januvia",
+   "istavel",
+   "sitagliptin"
+  ],
+  "purpose": "controls blood sugar",
+  "purpose_hi": "शुगर कंट्रोल करने की दवा",
+  "food": "any",
+  "brand_price_demo": 450,
+  "generic_price_demo": 60
+ },
+ {
+  "generic_key": "amlodipine",
+  "generic": "Amlodipine",
+  "cls": "ccb",
+  "aliases": [
+   "amlokind",
+   "norvasc",
+   "amlodipine",
+   "amlip"
+  ],
+  "purpose": "lowers blood pressure",
+  "purpose_hi": "बीपी कम करने की दवा",
+  "food": "any",
+  "brand_price_demo": 60,
+  "generic_price_demo": 8
+ },
+ {
+  "generic_key": "telmisartan",
+  "generic": "Telmisartan",
+  "cls": "arb",
+  "aliases": [
+   "telma",
+   "telmisartan",
+   "telmikind"
+  ],
+  "purpose": "lowers blood pressure",
+  "purpose_hi": "बीपी कम करने की दवा",
+  "food": "any",
+  "brand_price_demo": 120,
+  "generic_price_demo": 15
+ },
+ {
+  "generic_key": "losartan",
+  "generic": "Losartan",
+  "cls": "arb",
+  "aliases": [
+   "losar",
+   "losartan",
+   "repace"
+  ],
+  "purpose": "lowers blood pressure",
+  "purpose_hi": "बीपी कम करने की दवा",
+  "food": "any",
+  "brand_price_demo": 70,
+  "generic_price_demo": 10
+ },
+ {
+  "generic_key": "ramipril",
+  "generic": "Ramipril",
+  "cls": "acei",
+  "aliases": [
+   "cardace",
+   "ramipril",
+   "R-pril"
+  ],
+  "purpose": "lowers blood pressure",
+  "purpose_hi": "बीपी कम करने की दवा",
+  "food": "any",
+  "brand_price_demo": 110,
+  "generic_price_demo": 14
+ },
+ {
+  "generic_key": "enalapril",
+  "generic": "Enalapril",
+  "cls": "acei",
+  "aliases": [
+   "envas",
+   "enalapril",
+   "enam"
+  ],
+  "purpose": "lowers blood pressure",
+  "purpose_hi": "बीपी कम करने की दवा",
+  "food": "any",
+  "brand_price_demo": 45,
+  "generic_price_demo": 8
+ },
+ {
+  "generic_key": "atenolol",
+  "generic": "Atenolol",
+  "cls": "beta",
+  "aliases": [
+   "aten",
+   "tenormin",
+   "atenolol"
+  ],
+  "purpose": "lowers blood pressure and heart rate",
+  "purpose_hi": "बीपी और धड़कन कम करने की दवा",
+  "food": "any",
+  "brand_price_demo": 40,
+  "generic_price_demo": 6
+ },
+ {
+  "generic_key": "metoprolol",
+  "generic": "Metoprolol",
+  "cls": "beta",
+  "aliases": [
+   "metolar",
+   "betaloc",
+   "metoprolol"
+  ],
+  "purpose": "lowers blood pressure and heart rate",
+  "purpose_hi": "बीपी और धड़कन कम करने की दवा",
+  "food": "any",
+  "brand_price_demo": 65,
+  "generic_price_demo": 9
+ },
+ {
+  "generic_key": "atorvastatin",
+  "generic": "Atorvastatin",
+  "cls": "statin",
+  "aliases": [
+   "atorva",
+   "lipitor",
+   "atorvastatin",
+   "storvas"
+  ],
+  "purpose": "lowers cholesterol",
+  "purpose_hi": "कोलेस्ट्रॉल कम करने की दवा",
+  "food": "after",
+  "brand_price_demo": 130,
+  "generic_price_demo": 20
+ },
+ {
+  "generic_key": "aspirin",
+  "generic": "Aspirin",
+  "cls": "antiplatelet",
+  "aliases": [
+   "ecosprin",
+   "aspirin",
+   "disprin"
+  ],
+  "purpose": "thins blood to protect the heart",
+  "purpose_hi": "खून पतला रखने की दवा",
+  "food": "after",
+  "brand_price_demo": 6,
+  "generic_price_demo": 3
+ },
+ {
+  "generic_key": "clopidogrel",
+  "generic": "Clopidogrel",
+  "cls": "antiplatelet",
+  "aliases": [
+   "plavix",
+   "clopilet",
+   "clopidogrel"
+  ],
+  "purpose": "thins blood to protect the heart",
+  "purpose_hi": "खून पतला रखने की दवा",
+  "food": "after",
+  "brand_price_demo": 90,
+  "generic_price_demo": 15
+ },
+ {
+  "generic_key": "warfarin",
+  "generic": "Warfarin",
+  "cls": "anticoagulant",
+  "aliases": [
+   "warf",
+   "warfarin",
+   "coumadin"
+  ],
+  "purpose": "thins blood",
+  "purpose_hi": "खून पतला करने की दवा",
+  "food": "any",
+  "brand_price_demo": 40,
+  "generic_price_demo": 12
+ },
+ {
+  "generic_key": "pantoprazole",
+  "generic": "Pantoprazole",
+  "cls": "ppi",
+  "aliases": [
+   "pan",
+   "pantocid",
+   "pantoprazole",
+   "pan-40"
+  ],
+  "purpose": "reduces stomach acid",
+  "purpose_hi": "एसिडिटी की दवा",
+  "food": "before",
+  "brand_price_demo": 150,
+  "generic_price_demo": 20
+ },
+ {
+  "generic_key": "omeprazole",
+  "generic": "Omeprazole",
+  "cls": "ppi",
+  "aliases": [
+   "omez",
+   "omeprazole",
+   "prilosec"
+  ],
+  "purpose": "reduces stomach acid",
+  "purpose_hi": "एसिडिटी की दवा",
+  "food": "before",
+  "brand_price_demo": 60,
+  "generic_price_demo": 10
+ },
+ {
+  "generic_key": "paracetamol",
+  "generic": "Paracetamol",
+  "cls": "analgesic",
+  "aliases": [
+   "dolo",
+   "crocin",
+   "calpol",
+   "paracetamol"
+  ],
+  "purpose": "reduces fever and mild pain",
+  "purpose_hi": "बुखार और हल्के दर्द की दवा",
+  "food": "after",
+  "brand_price_demo": 30,
+  "generic_price_demo": 10
+ },
+ {
+  "generic_key": "ibuprofen",
+  "generic": "Ibuprofen",
+  "cls": "nsaid",
+  "aliases": [
+   "brufen",
+   "ibuprofen",
+   "combiflam"
+  ],
+  "purpose": "pain and swelling relief",
+  "purpose_hi": "दर्द और सूजन की दवा",
+  "food": "after",
+  "brand_price_demo": 35,
+  "generic_price_demo": 8
+ },
+ {
+  "generic_key": "diclofenac",
+  "generic": "Diclofenac",
+  "cls": "nsaid",
+  "aliases": [
+   "voveran",
+   "diclofenac",
+   "dynapar"
+  ],
+  "purpose": "pain and swelling relief",
+  "purpose_hi": "दर्द और सूजन की दवा",
+  "food": "after",
+  "brand_price_demo": 40,
+  "generic_price_demo": 8
+ },
+ {
+  "generic_key": "levothyroxine",
+  "generic": "Levothyroxine",
+  "cls": "thyroid",
+  "aliases": [
+   "thyronorm",
+   "eltroxin",
+   "levothyroxine"
+  ],
+  "purpose": "replaces thyroid hormone",
+  "purpose_hi": "थायराइड की दवा",
+  "food": "empty",
+  "brand_price_demo": 200,
+  "generic_price_demo": 100
+ },
+ {
+  "generic_key": "cetirizine",
+  "generic": "Cetirizine",
+  "cls": "antihistamine",
+  "aliases": [
+   "okacet",
+   "cetirizine",
+   "cetzine"
+  ],
+  "purpose": "relieves allergy",
+  "purpose_hi": "एलर्जी की दवा",
+  "food": "night",
+  "brand_price_demo": 25,
+  "generic_price_demo": 5
+ }
+]

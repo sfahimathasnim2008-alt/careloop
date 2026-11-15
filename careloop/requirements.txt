@@ -1,0 +1,4 @@
+flask>=3.0
+# Optional, for reading prescription photos (also install the Tesseract OCR program):
+# pytesseract
+# pillow
